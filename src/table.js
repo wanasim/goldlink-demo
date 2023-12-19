@@ -30,13 +30,17 @@ export default function Table() {
     },
   ];
 
-  const fetchVolatilityColor = (text) => {
+  const getVolatilityColor = (text) => {
     console.log("invoked", text);
     return text === "Low"
       ? "bg-table-purple-low"
       : text === "Medium"
       ? "bg-table-purple-med"
       : "bg-table-purple-high";
+  };
+
+  const getPnlColor = (number) => {
+    return number > 0 ? "text-pnl-green" : "text-pnl-red";
   };
   return (
     <>
@@ -85,16 +89,20 @@ export default function Table() {
               <div className=" border-t-5">
                 {str.strategy}
               </div>
-              <div className="">{str.tvl}</div>
+              <div className="">
+                ${str.tvl.toLocaleString("en-US")}
+              </div>
               <div
-                className={`text-white ${fetchVolatilityColor(
+                className={`text-white ${getVolatilityColor(
                   str.volatility
                 )} rounded-full px-3 py-1 w-min`}
               >
                 {str.volatility}
               </div>
               <div className="">{str.collateral}</div>
-              <div className="">{str.pnl}</div>
+              <div className={`${getPnlColor(str.pnl)}`}>
+                ${str.pnl.toLocaleString("en-US")}
+              </div>
             </div>
           );
         })}
