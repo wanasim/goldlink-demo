@@ -10,9 +10,13 @@ import Table from "./table";
 
 export default function App() {
   return (
-    <div className=" ">
-      <Pie />
-      <Table />
+    <div className="flex gap-4 p-4">
+      <div className="basis-1/3 border shadow-lg rounded-lg  p-5">
+        <Pie />
+      </div>
+      <div className="basis-2/3 border shadow-lg rounded-lg  p-5">
+        <Table />
+      </div>
     </div>
   );
 }

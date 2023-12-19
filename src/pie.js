@@ -6,11 +6,10 @@ import {
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import Table from "./table";
-import { useEffect } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
+const data = {
   labels: [
     "Strategy 1",
     "Strategy 2",
@@ -20,7 +19,7 @@ export const data = {
   datasets: [
     {
       label: "Lending Allocations",
-      data: [0.5, 0.25, 0.125, 0.125],
+      data: [0.5, 0.125, 0.125, 0.25],
       backgroundColor: [
         "#855CF8",
         "#E289F2",
@@ -30,38 +29,41 @@ export const data = {
     },
   ],
 };
-export default function Chart() {
-  useEffect(() => {
-    const ctx = document.getElementById("myChart");
 
-    const pieChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: [
-          "Red",
-          "Blue",
-          "Yellow",
-          "Green",
-          "Purple",
-          "Orange",
-        ],
-        datasets: [
-          {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1,
-          },
-        ],
+const options = {
+  plugins: {
+    title: {
+      display: true,
+      text: "CSDLFKGNFSLKGNSDFSNDFGNSDFLGNSDFNGSDNKGN",
+      position: "bottom", // Position of the title
+      font: {
+        size: 18, // Font size of the title
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
+    },
+    legend: {
+      maxSize: 1000,
+      position: "bottom", // This will move the legend to the bottom
+      labels: {
+        usePointStyle: true, // This will use points instead of boxes for legend items
+        pointStyle: "circle", // Specify the point as a circle
+        padding: 20, // Adjust spacing between legend items
+        font: {
+          size: 16, // Adjust font size as needed
         },
       },
-    });
-  }, []);
-  // return <Pie data={data} />;
-  return <div id="myChart"></div>;
+    },
+  },
+};
+export default function PieChart() {
+  return (
+    <div className="">
+      <h1>
+        Lending Allocations
+        <p className=" float-right">$5000 USDC</p>
+      </h1>
+      <div className="flex justify-center pt-4">
+        <Pie data={data} options={options} />
+      </div>
+    </div>
+  );
 }
